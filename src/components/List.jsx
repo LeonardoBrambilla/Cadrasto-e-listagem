@@ -20,7 +20,7 @@ export default function List() {
 
   useEffect(() => {
     const get = async () => {
-      const {data} = await axios.get("https://cadrasto-e-listagem.vercel.app/")
+      const {data} = await axios.get("https://cadrasto-e-listagem-server.vercel.app/")
       console.log(data[0]._id)
       setProducts(data)
     }
@@ -29,7 +29,7 @@ export default function List() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("https://cadrasto-e-listagem.vercel.app/",{name,description,value,sell})
+    await axios.post("https://cadrasto-e-listagem-server.vercel.app/",{name,description,value,sell})
     setProducts([...products,{name,description,value,sell}])
     setName('');
     setDescription('');
@@ -67,7 +67,7 @@ export default function List() {
   const handleRemoveItem = async (id) => {
     setProducts((prevItems) => prevItems.filter((item) => item._id !== id))
     console.log(id)
-    await axios.delete(`https://cadrasto-e-listagem.vercel.app/${id}`)
+    await axios.delete(`https://cadrasto-e-listagem-server.vercel.app//${id}`)
 
   }
 
