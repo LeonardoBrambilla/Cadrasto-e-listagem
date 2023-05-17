@@ -14,6 +14,7 @@ const port = process.env.PORT || 5000
 
 const start = async()=>{ 
   try{
+    app.use(express.static('public'))
     app.listen(port,()=>
       console.log('Server is running on port 5000')
     )
