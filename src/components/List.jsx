@@ -1,8 +1,10 @@
-import { useState , useEffect } from "react"
+import React,{ useState , useEffect } from "react"
 import axios from 'axios';
 import { TextField, FormControl, FormControlLabel, RadioGroup, Radio, Button , Box ,Collapse } from '@mui/material';
 import { Table, TableHead, TableBody, TableRow, TableCell , IconButton } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 export default function List() {
 
@@ -18,10 +20,10 @@ export default function List() {
 
   const [isFormVisible, setIsFormVisible] = useState(false);
 
+  
   useEffect(() => {
     const get = async () => {
       const {data} = await axios.get("https://cadrasto-e-listagem-server.vercel.app/")
-      console.log(data[0]._id)
       setProducts(data)
     }
     get()
@@ -64,12 +66,7 @@ export default function List() {
     setIsFormVisible(!isFormVisible);
   };
 
-  const handleRemoveItem = async (id) => {
-    setProducts((prevItems) => prevItems.filter((item) => item._id !== id))
-    console.log(id)
-    await axios.delete(`https://cadrasto-e-listagem-server.vercel.app//${id}`)
-
-  }
+  
 
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
@@ -127,8 +124,8 @@ export default function List() {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell align="center" sx={{color:"white"}}></TableCell>
               <TableCell align="center" sx={{color:"white"}}>Nome</TableCell>
-              <TableCell align="center" sx={{color:"white"}}>Descrição</TableCell>
               <TableCell align="center">
                 <Button sx={{color:"white"}} onClick={handleSort}>
                   {sortAscending ? 'Valor ▲' : 'Valor ▼'}
@@ -143,19 +140,59 @@ export default function List() {
           </TableHead>
           <TableBody>
             {products.map(e=>(
-              <TableRow hover={true}  key={e._id}>
-                <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.name}</TableCell>
-                <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.description}</TableCell>
-                <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.value}</TableCell>
-                <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.sell ? "sim" : "não" }</TableCell>     
-                  <IconButton onClick={() => handleRemoveItem(e._id)}>
-                    <DeleteOutlineIcon sx={{color:"red"}}/>
-                  </IconButton>
-              </TableRow>
+              <TableComponent product={e}/>
+              // <TableRow hover={true}  key={e._id}>                
+              //   <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.name}</TableCell>                
+              //   <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.value}</TableCell>
+              //   <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.sell ? "sim" : "não" }</TableCell>     
+              //     <IconButton onClick={() => handleRemoveItem(e._id)}>
+              //       <DeleteOutlineIcon sx={{color:"red"}}/>
+              //     </IconButton>
+              // </TableRow>
+    
             ))}
           </TableBody>
         </Table>
       </Box>
     </div>
+  )
+}
+
+
+const TableComponent = ({product}) => {
+  console.log(product)
+  const [open, setOpen] = useState(false);
+
+
+  const handleRemoveItem = async () => {
+    await axios.delete(`https://cadrasto-e-listagem-server.vercel.app/${product._id}`)
+  }
+  return (
+    <>
+      <TableRow hover={true}  >      
+        <TableCell sx={{borderBottom:"none"}}>
+          <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+              >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>      
+        <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{product.name}</TableCell>                
+        <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{product.value}</TableCell>
+        <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{product.sell ? "sim" : "não" }</TableCell>     
+          <IconButton onClick={() => handleRemoveItem(product._id)}>
+            <DeleteOutlineIcon sx={{color:"red"}}/>
+          </IconButton>
+      </TableRow>
+      <TableCell style={{ paddingBottom: 0, paddingTop: 0,color:"white" ,border:"none"}} colSpan={5}>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <Box sx={{ margin: 1 }}>
+            Descrição: {product.description}
+          </Box>
+        </Collapse>
+      </TableCell>
+    </>
   )
 }
