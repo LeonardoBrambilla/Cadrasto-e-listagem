@@ -123,7 +123,7 @@ export default function List() {
           </Box>
         </form>
       </Collapse>
-      <Box style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:10,width:550}}>
+      <Box style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:10,width:650}}>
         <Table>
           <TableHead>
             <TableRow>
