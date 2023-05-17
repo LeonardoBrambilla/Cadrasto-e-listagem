@@ -26,7 +26,7 @@ npm install in './' e './server'
 
 Requisito: 𝐂𝐚𝐝𝐚𝐬𝐭𝐫𝐨 𝐞 𝐥𝐢𝐬𝐭𝐚𝐠𝐞𝐦 𝐝𝐞 𝐩𝐫𝐨𝐝𝐮𝐭𝐨𝐬
 
-𝐂𝐚𝐝𝐚𝐬𝐭𝐫𝐨:
+Cadrasto:
 
 - Formulário com os campos abaixo:
 
@@ -35,15 +35,17 @@ Requisito: 𝐂𝐚𝐝𝐚𝐬𝐭𝐫𝐨 𝐞 𝐥𝐢𝐬𝐭𝐚𝐠𝐞�
   - [X] Valor do produto - campo de valor
   - [X] Disponível para venda - campo com 2 opções: sim / não
 
-𝐋𝐢𝐬𝐭𝐚𝐠𝐞𝐦:
+Listagem:
 
 - [X] Colunas da listagem: nome, valor
 - [X] Ordenação por valor do menor para o maior
 - [X] Quando cadastrar um novo produto é para abrir a listagem automaticamente
 - [X] Deve existir um botão para cadastrar um novo produto a partir da listagem
 
+Implementação adicionais:
 
-
+- Botão de remover
+- Descrição de cada item
 
 
 

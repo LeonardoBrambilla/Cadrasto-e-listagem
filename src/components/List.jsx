@@ -160,9 +160,7 @@ export default function List() {
 
 
 const TableComponent = ({product}) => {
-  console.log(product)
   const [open, setOpen] = useState(false);
-
 
   const handleRemoveItem = async () => {
     await axios.delete(`https://cadrasto-e-listagem-server.vercel.app/${product._id}`)
