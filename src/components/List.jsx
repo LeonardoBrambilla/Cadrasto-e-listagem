@@ -75,7 +75,8 @@ export default function List() {
             <TextField
               label="Nome do produto"
               value={name}
-              onChange={(event) => setName(event.target.value)}        
+              onChange={(event) => setName(event.target.value)}
+              required
               InputLabelProps={{ style: {color:"white"} }}
               InputProps={{ style: {color:"white"} }}
               sx={{ m: 2 }}
@@ -114,7 +115,7 @@ export default function List() {
           </Box>
         </form>
       </Collapse>
-      <Box style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:10,width:700}}>
+      <Box style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:10,width:500}}>
         <Table>
           <TableHead>
             <TableRow>

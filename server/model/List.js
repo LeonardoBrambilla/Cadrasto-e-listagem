@@ -10,6 +10,6 @@ const ListSchema = new mongoose.Schema({
   }  
 })
 
-const List = mongoose.model("Banners", ListSchema);
+const List = mongoose.model("Lista", ListSchema);
 
 module.exports = List
