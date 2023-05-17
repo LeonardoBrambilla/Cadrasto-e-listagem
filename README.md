@@ -11,7 +11,7 @@
 # Como rodar esse projeto
 ```sh
 git clone https://github.com/LeonardoBrambilla/Cadrasto-e-listagem.git
-npm install in './" e './server'
+npm install in './' e './server'
 `./` npm run dev
 `./server` npm start
 ```
