@@ -140,16 +140,7 @@ export default function List() {
           </TableHead>
           <TableBody>
             {products.map(e=>(
-              <TableComponent product={e}/>
-              // <TableRow hover={true}  key={e._id}>                
-              //   <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.name}</TableCell>                
-              //   <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.value}</TableCell>
-              //   <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.sell ? "sim" : "não" }</TableCell>     
-              //     <IconButton onClick={() => handleRemoveItem(e._id)}>
-              //       <DeleteOutlineIcon sx={{color:"red"}}/>
-              //     </IconButton>
-              // </TableRow>
-    
+              <TableComponent product={e}/>       
             ))}
           </TableBody>
         </Table>
