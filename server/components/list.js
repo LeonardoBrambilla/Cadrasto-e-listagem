@@ -22,4 +22,10 @@ exports.getProduct = async (req,res) => {
   res.status(200).send(data)
 }
 
+exports.removeProduct = async (req,res) => {  
+  const {id} = req.params
+  await List.findOneAndDelete({_id:id})
+  console.log(id)
+  res.status(200).send(id)
+}
 

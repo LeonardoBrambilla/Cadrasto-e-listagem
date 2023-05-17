@@ -1,7 +1,8 @@
 import { useState , useEffect } from "react"
 import axios from 'axios';
 import { TextField, FormControl, FormControlLabel, RadioGroup, Radio, Button , Box ,Collapse } from '@mui/material';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { Table, TableHead, TableBody, TableRow, TableCell , IconButton } from '@mui/material';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export default function List() {
 
@@ -20,7 +21,7 @@ export default function List() {
   useEffect(() => {
     const get = async () => {
       const {data} = await axios.get("http://localhost:5000/")
-      console.log(data)
+      console.log(data[0]._id)
       setProducts(data)
     }
     get()
@@ -62,6 +63,13 @@ export default function List() {
   const toggleFormVisibility = () => {
     setIsFormVisible(!isFormVisible);
   };
+
+  const handleRemoveItem = async (id) => {
+    setProducts((prevItems) => prevItems.filter((item) => item._id !== id))
+    console.log(id)
+    await axios.delete(`http://localhost:5000/${id}`)
+
+  }
 
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
@@ -115,31 +123,34 @@ export default function List() {
           </Box>
         </form>
       </Collapse>
-      <Box style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:10,width:500}}>
+      <Box style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:10,width:550}}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell align="center" sx={{color:"white"}}>Nome</TableCell>
               <TableCell align="center" sx={{color:"white"}}>Descrição</TableCell>
               <TableCell align="center">
-                <button onClick={handleSort}>
+                <Button sx={{color:"white"}} onClick={handleSort}>
                   {sortAscending ? 'Valor ▲' : 'Valor ▼'}
-                </button>
+                </Button>
               </TableCell>
               <TableCell align="center">
-                <button onClick={handleSell}>
+                <Button sx={{color:"white"}} onClick={handleSell}>
                   Disponivel
-                </button>
+                </Button>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {products.map(e=>(
-              <TableRow hover={true}  key={e.key}>
+              <TableRow hover={true}  key={e._id}>
                 <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.name}</TableCell>
                 <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.description}</TableCell>
                 <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.value}</TableCell>
-                <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.sell ? "sim" : "não" }</TableCell>
+                <TableCell align="center" sx={{color:"white",borderBottom:"none"}}>{e.sell ? "sim" : "não" }</TableCell>     
+                  <IconButton onClick={() => handleRemoveItem(e._id)}>
+                    <DeleteOutlineIcon sx={{color:"red"}}/>
+                  </IconButton>
               </TableRow>
             ))}
           </TableBody>
