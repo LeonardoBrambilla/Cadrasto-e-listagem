@@ -1,5 +1,6 @@
 # Sobre o Projeto
 - Este projeto é formulario com listagem de produtos
+- Da para ver o projeto pelo https://cadrasto-e-listagem.vercel.app/
 
 # Configuração do projeto
 - FrameWork React para o frontend
@@ -21,6 +22,7 @@ npm install in './' e './server'
 - `./client/src/components`: São os componentes do projeto
 - `./server/models`: É o modelo de bando de dados
 - `./server/routes`: São as rotas de cada serviço
+
 
 
 
